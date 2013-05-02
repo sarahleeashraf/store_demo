@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
   attr_accessible :title, :description, :price, :status, :category_ids, :image_path
   has_and_belongs_to_many :categories
-  has_many :product_sales, :class_name => 'Sale', :foreign_key => :foreign_key, :conditions => "sales.status='active' and sales.group='product'"
+  has_many :product_sales, :class_name => 'Sale', :foreign_key => :foreign_key, :conditions => "sales.status='active' AND sales.group='product'"
 
   validates :title, presence: :true,
                     uniqueness: { case_sensitive: false }
