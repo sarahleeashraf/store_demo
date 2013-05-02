@@ -1,3 +1,5 @@
+<% cache product do %>
+
 <%= link_to product_path(product) do %>
   <div class="products span2">
     <p><%= image_tag product.thumbnail_path %></p>
@@ -9,6 +11,8 @@
       <p><%= t('product.price') %>: <%= number_to_currency(product.price) %></p>
     <% end %>
   </div>
+<% end %>
+
 <% end %>
 
 
