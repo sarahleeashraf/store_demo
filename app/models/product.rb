@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   attr_accessible :title, :description, :price, :status, :category_ids, :image_path
   has_and_belongs_to_many :categories
+  has_many :product_sales, :class_name => 'Sale', :foreign_key => :foreign_key, :conditions => "sales.status='active' and sales.group='product'"
 
   validates :title, presence: :true,
                     uniqueness: { case_sensitive: false }
@@ -61,11 +62,11 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def product_sales
-    Sale.where(group: 'product').
-         where(status: 'active').
-         where(foreign_key: self.id)
-  end
+  #def product_sales
+  #  Sale.where(group: 'product').
+  #       where(status: 'active').
+  #       where(foreign_key: self.id)
+  #end
 
   def percent_of_product
     sales_products = product_sales.map do |product_sale|
